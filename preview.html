@@ -85,10 +85,9 @@
     .brand-left {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 22px;
       min-width: 0;
       flex-wrap: wrap;
-      flex: 1;
     }
 
     .brand-logos {
@@ -103,7 +102,7 @@
     }
 
     .logo-wrap {
-      width: 126px;
+      width: 306px;
       height: 88px;
       background: linear-gradient(135deg, #0a2343 0%, #123a69 100%);
       border-radius: 18px;
@@ -153,18 +152,6 @@
     .meta {
       color: var(--muted);
       font-size: 14px;
-    }
-
-    .score-badge {
-      background: linear-gradient(180deg, #ffef47 0%, #ffe000 100%);
-      color: var(--porr-blue-deep);
-      padding: 12px 16px;
-      border-radius: 12px;
-      font-size: 15px;
-      font-weight: bold;
-      min-width: 110px;
-      text-align: center;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
     }
 
     .screen {
@@ -281,6 +268,132 @@
       color: var(--wrong);
     }
 
+    .mode-panel {
+      max-width: 700px;
+      margin: 0 auto 24px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.07) 100%);
+      text-align: left;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .mode-panel strong {
+      display: block;
+      color: var(--text-strong);
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+
+    .mode-panel span {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .mode-toggle {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    button.mode-btn {
+      flex: 1 1 220px;
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-strong);
+      cursor: pointer;
+      text-align: left;
+      transition: transform 0.08s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    button.mode-btn strong,
+    button.mode-btn span {
+      display: block;
+      pointer-events: none;
+    }
+
+    button.mode-btn strong {
+      margin: 0 0 6px;
+      font-size: 16px;
+      color: var(--text-strong);
+    }
+
+    button.mode-btn span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    button.mode-btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(255, 255, 255, 0.28);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.12);
+    }
+
+    button.mode-btn.active {
+      background: rgba(255, 237, 0, 0.14);
+      border-color: rgba(255, 237, 0, 0.36);
+      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.16);
+    }
+
+    button.mode-btn.active span {
+      color: #fff7bf;
+    }
+
+    .player-setup {
+      max-width: 700px;
+      margin: 0 auto 24px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .player-field {
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      text-align: left;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+
+    .player-field label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: bold;
+      color: var(--text-strong);
+    }
+
+    .player-field input {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(8, 24, 47, 0.48);
+      color: var(--text-strong);
+      padding: 12px 14px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .player-field input::placeholder {
+      color: rgba(197, 215, 238, 0.68);
+    }
+
+    .player-field input:focus {
+      border-color: rgba(255, 237, 0, 0.4);
+      box-shadow: 0 0 0 3px rgba(255, 237, 0, 0.12);
+    }
+
+    .is-hidden {
+      display: none !important;
+    }
+
     .progress-wrap {
       margin-bottom: 22px;
     }
@@ -323,6 +436,115 @@
       margin-bottom: 22px;
       font-weight: bold;
       color: var(--text-strong);
+    }
+
+    .multiplayer-strip {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .player-score-card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px 16px;
+      background: var(--surface);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      transition: border-color 0.2s ease, transform 0.08s ease, background 0.2s ease;
+    }
+
+    .player-score-card.active {
+      border-color: rgba(255, 237, 0, 0.38);
+      background: rgba(255, 237, 0, 0.12);
+      transform: translateY(-1px);
+    }
+
+    .player-score-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .player-score-name {
+      font-size: 15px;
+      font-weight: bold;
+      color: var(--text-strong);
+    }
+
+    .player-score-value {
+      font-size: 28px;
+      font-weight: bold;
+      color: var(--text-strong);
+      line-height: 1;
+    }
+
+    .player-score-meta {
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .turn-panel {
+      margin-bottom: 18px;
+      padding: 16px 18px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.06) 100%);
+      text-align: left;
+    }
+
+    .turn-panel strong {
+      display: block;
+      margin-top: 4px;
+      color: var(--text-strong);
+      font-size: 18px;
+    }
+
+    .turn-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    button.player-select-btn {
+      flex: 1 1 220px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-strong);
+      padding: 14px 16px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.08s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    button.player-select-btn:hover:not(:disabled) {
+      transform: translateY(-1px);
+      border-color: rgba(255, 255, 255, 0.28);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.14);
+    }
+
+    button.player-select-btn.selected {
+      background: linear-gradient(180deg, #ffef47 0%, #ffe000 100%);
+      color: var(--porr-blue-deep);
+      border-color: rgba(255, 237, 0, 0.42);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
+    }
+
+    button.player-select-btn:disabled {
+      cursor: not-allowed;
+      opacity: 0.72;
+    }
+
+    .turn-note {
+      min-height: 20px;
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--muted);
     }
 
     .answers {
@@ -487,6 +709,59 @@
       font-size: 13px;
     }
 
+    .winner-banner {
+      max-width: 620px;
+      margin: 0 auto 18px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 237, 0, 0.32);
+      background: rgba(255, 237, 0, 0.16);
+      color: var(--text-strong);
+      font-weight: bold;
+    }
+
+    .winner-banner.tie {
+      border-color: var(--border);
+      background: var(--surface-strong);
+    }
+
+    .player-result-grid {
+      margin: 20px auto 24px;
+      max-width: 620px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .player-result-card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      background: var(--surface-strong);
+      text-align: left;
+    }
+
+    .player-result-card strong {
+      display: block;
+      font-size: 20px;
+      color: var(--text-strong);
+      margin-bottom: 10px;
+    }
+
+    .player-result-card .player-result-score {
+      font-size: 34px;
+      font-weight: bold;
+      color: var(--text-strong);
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .player-result-card .player-result-meta {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
     .small-note {
       margin-top: 18px;
       font-size: 13px;
@@ -536,6 +811,17 @@
         grid-template-columns: 1fr;
       }
 
+      .mode-toggle,
+      .turn-buttons {
+        flex-direction: column;
+      }
+
+      .player-setup,
+      .multiplayer-strip,
+      .player-result-grid {
+        grid-template-columns: 1fr;
+      }
+
       .authoring-header,
       .footer,
       .progress-top {
@@ -560,28 +846,50 @@
             <div class="logo-wrap">
               <img src="Porr-Logo_v2.png" alt="PORR Logo">
             </div>
-            <div class="festival-logo-wrap">
-              <img src="Logo-Construct-Fest-1-1.svg" alt="Construct Fest 2026 Logo">
-            </div>
           </div>
           <div class="brand-copy">
             <h1>Quiz PORR Construct</h1>
-            <div class="meta">Edi&#539;ie Construct Fest 2026</div>
+            <div class="meta">Edi&#539;ie ConstructFEST 2026</div>
           </div>
         </div>
-        <div class="score-badge" id="scoreDisplay">Scor: 0</div>
       </div>
 
       <div id="startView" class="screen active">
         <div class="start-box">
           <h2>Bine ai venit</h2>
-          <p>
+          <p id="startIntroText">
             &#206;n aceast&#259; rund&#259; vei primi p&#226;n&#259; la 5 &#238;ntreb&#259;ri alese automat. R&#259;spunsurile sunt amestecate la fiecare &#238;ntrebare, iar feedback-ul apare imediat dup&#259; selec&#539;ie.
           </p>
 
+          <div class="mode-panel">
+            <strong>Alege modul de joc</strong>
+            <span id="modeDescription">Quiz-ul normal p&#259;streaz&#259; fluxul clasic, cu un singur scor pentru toat&#259; runda.</span>
+            <div class="mode-toggle">
+              <button class="mode-btn active" id="singleModeBtn" type="button">
+                <strong>Quiz normal</strong>
+                <span>Experien&#539;a actual&#259;, cu un singur juc&#259;tor &#537;i scor unic.</span>
+              </button>
+              <button class="mode-btn" id="multiModeBtn" type="button">
+                <strong>Quiz 2 juc&#259;tori</strong>
+                <span>Un singur operator folose&#537;te aplica&#539;ia &#537;i decide cine r&#259;spunde la fiecare &#238;ntrebare.</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="player-setup is-hidden" id="playerSetup">
+            <div class="player-field">
+              <label for="player1Input">Nume juc&#259;tor 1</label>
+              <input id="player1Input" type="text" maxlength="32" placeholder="Player 1" />
+            </div>
+            <div class="player-field">
+              <label for="player2Input">Nume juc&#259;tor 2</label>
+              <input id="player2Input" type="text" maxlength="32" placeholder="Player 2" />
+            </div>
+          </div>
+
           <div class="start-info">
             <strong>Cum func&#539;ioneaz&#259;</strong>
-            <span>
+            <span id="startHowItWorksText">
               Apas&#259; pe &bdquo;&#206;ncepe quiz-ul&rdquo;, r&#259;spunde la &#238;ntreb&#259;rile din rund&#259; &#537;i vezi scorul final la final.
               Po&#539;i relua runda oric&#226;nd sau te po&#539;i &#238;ntoarce la ecranul de start.
             </span>
@@ -624,6 +932,33 @@
           </div>
         </div>
 
+        <div class="multiplayer-strip is-hidden" id="multiplayerScoreStrip">
+          <div class="player-score-card" id="player1ScoreCard">
+            <div class="player-score-top">
+              <span class="player-score-name" id="player1ScoreName">Player 1</span>
+              <span class="player-score-value" id="player1ScoreValue">0</span>
+            </div>
+            <div class="player-score-meta" id="player1ScoreMeta">0 &#238;ntreb&#259;ri atribuite</div>
+          </div>
+          <div class="player-score-card" id="player2ScoreCard">
+            <div class="player-score-top">
+              <span class="player-score-name" id="player2ScoreName">Player 2</span>
+              <span class="player-score-value" id="player2ScoreValue">0</span>
+            </div>
+            <div class="player-score-meta" id="player2ScoreMeta">0 &#238;ntreb&#259;ri atribuite</div>
+          </div>
+        </div>
+
+        <div class="turn-panel is-hidden" id="multiplayerTurnPanel">
+          <div class="meta">Atribuire &#238;ntrebare</div>
+          <strong id="turnPanelTitle">Alege cine r&#259;spunde la &#238;ntrebarea curent&#259;.</strong>
+          <div class="turn-buttons">
+            <button class="player-select-btn" id="player1SelectBtn" type="button">Player 1</button>
+            <button class="player-select-btn" id="player2SelectBtn" type="button">Player 2</button>
+          </div>
+          <div class="turn-note" id="turnSelectionNote">Selecteaz&#259; juc&#259;torul &#238;nainte s&#259; alegi r&#259;spunsul.</div>
+        </div>
+
         <div class="question-number" id="questionNumber"></div>
         <div class="question-text" id="questionText"></div>
         <div class="answers" id="answersContainer"></div>
@@ -639,11 +974,11 @@
 
       <div id="resultView" class="screen">
         <div class="result">
-          <div class="meta">Rund&#259; finalizat&#259;</div>
+          <div class="meta" id="resultMetaText">Rund&#259; finalizat&#259;</div>
           <div class="result-score" id="finalScore"></div>
           <p id="finalText"></p>
 
-          <div class="result-summary">
+          <div class="result-summary" id="singleResultSummary">
             <div class="result-tile">
               <strong id="correctAnswersCount">0</strong>
               <span>R&#259;spunsuri corecte</span>
@@ -655,6 +990,21 @@
             <div class="result-tile">
               <strong id="finalPercent">0%</strong>
               <span>Scor final</span>
+            </div>
+          </div>
+
+          <div class="winner-banner is-hidden" id="winnerBanner"></div>
+
+          <div class="player-result-grid is-hidden" id="multiplayerResultSummary">
+            <div class="player-result-card">
+              <strong id="resultPlayer1Name">Player 1</strong>
+              <div class="player-result-score" id="resultPlayer1Score">0</div>
+              <div class="player-result-meta" id="resultPlayer1Meta">0 &#238;ntreb&#259;ri atribuite</div>
+            </div>
+            <div class="player-result-card">
+              <strong id="resultPlayer2Name">Player 2</strong>
+              <div class="player-result-score" id="resultPlayer2Score">0</div>
+              <div class="player-result-meta" id="resultPlayer2Meta">0 &#238;ntreb&#259;ri atribuite</div>
             </div>
           </div>
 
@@ -671,6 +1021,32 @@
     const STORAGE_KEY = 'porr-quiz-question-set-v1';
     const QUESTIONS_PER_ROUND = 5;
     const TEMPLATE_FILE_NAME = 'porr-questions-template.json';
+    const GAME_MODES = {
+      SINGLE: 'single',
+      MULTI: 'multi'
+    };
+    const PLAYER_KEYS = {
+      PLAYER_1: 'player1',
+      PLAYER_2: 'player2'
+    };
+    const PLAYER_DEFAULT_NAMES = {
+      player1: 'Player 1',
+      player2: 'Player 2'
+    };
+    const MODE_COPY = {
+      single: {
+        intro: '\u00CEn aceast\u0103 rund\u0103 vei primi p\u00E2n\u0103 la 5 \u00EEntreb\u0103ri alese automat. R\u0103spunsurile sunt amestecate la fiecare \u00EEntrebare, iar feedback-ul apare imediat dup\u0103 selec\u021Bie.',
+        description: 'Quiz-ul normal p\u0103streaz\u0103 fluxul clasic, cu un singur scor pentru toat\u0103 runda.',
+        howItWorks: 'Apas\u0103 pe „\u00CEncepe quiz-ul”, r\u0103spunde la \u00EEntreb\u0103rile din rund\u0103 \u0219i vezi scorul final la final. Po\u021Bi relua runda oric\u00E2nd sau te po\u021Bi \u00EEntoarce la ecranul de start.',
+        startLabel: '\u00CEncepe quiz-ul'
+      },
+      multi: {
+        intro: '\u00CEn modul 2 juc\u0103tori, un singur operator folose\u0219te aplica\u021Bia, iar pentru fiecare \u00EEntrebare alege dac\u0103 r\u0103spunde Player 1 sau Player 2.',
+        description: 'Doi oameni joac\u0103 pe r\u00E2nd, dar aplica\u021Bia r\u0103m\u00E2ne pe un singur ecran \u0219i \u021Bine scor separat pentru fiecare.',
+        howItWorks: 'Introdu numele juc\u0103torilor, apas\u0103 pe „\u00CEncepe duelul”, apoi pentru fiecare \u00EEntrebare selecteaz\u0103 cine r\u0103spunde. Punctul merge doar la juc\u0103torul ales pentru acea \u00EEntrebare.',
+        startLabel: '\u00CEncepe duelul'
+      }
+    };
 
     const DEFAULT_QUESTION_SET = {
       version: 1,
@@ -756,15 +1132,25 @@
       fileName: null,
       persisted: false
     };
+    let gameMode = GAME_MODES.SINGLE;
     let quizData = [];
     let currentQuestionIndex = 0;
     let score = 0;
     let answered = false;
+    let multiplayerState = createDefaultMultiplayerState();
 
     const startView = document.getElementById('startView');
     const quizView = document.getElementById('quizView');
     const resultView = document.getElementById('resultView');
 
+    const startIntroText = document.getElementById('startIntroText');
+    const modeDescription = document.getElementById('modeDescription');
+    const singleModeBtn = document.getElementById('singleModeBtn');
+    const multiModeBtn = document.getElementById('multiModeBtn');
+    const playerSetup = document.getElementById('playerSetup');
+    const player1Input = document.getElementById('player1Input');
+    const player2Input = document.getElementById('player2Input');
+    const startHowItWorksText = document.getElementById('startHowItWorksText');
     const startBtn = document.getElementById('startBtn');
     const importBtn = document.getElementById('importBtn');
     const downloadTemplateBtn = document.getElementById('downloadTemplateBtn');
@@ -773,23 +1159,48 @@
     const questionSourceBadge = document.getElementById('questionSourceBadge');
     const questionSourceDetails = document.getElementById('questionSourceDetails');
     const importFeedback = document.getElementById('importFeedback');
+
+    const progressText = document.getElementById('progressText');
+    const roundMeta = document.getElementById('roundMeta');
+    const progressFill = document.getElementById('progressFill');
+    const multiplayerScoreStrip = document.getElementById('multiplayerScoreStrip');
+    const player1ScoreCard = document.getElementById('player1ScoreCard');
+    const player2ScoreCard = document.getElementById('player2ScoreCard');
+    const player1ScoreName = document.getElementById('player1ScoreName');
+    const player2ScoreName = document.getElementById('player2ScoreName');
+    const player1ScoreValue = document.getElementById('player1ScoreValue');
+    const player2ScoreValue = document.getElementById('player2ScoreValue');
+    const player1ScoreMeta = document.getElementById('player1ScoreMeta');
+    const player2ScoreMeta = document.getElementById('player2ScoreMeta');
+    const multiplayerTurnPanel = document.getElementById('multiplayerTurnPanel');
+    const turnPanelTitle = document.getElementById('turnPanelTitle');
+    const player1SelectBtn = document.getElementById('player1SelectBtn');
+    const player2SelectBtn = document.getElementById('player2SelectBtn');
+    const turnSelectionNote = document.getElementById('turnSelectionNote');
     const questionNumber = document.getElementById('questionNumber');
     const questionText = document.getElementById('questionText');
     const answersContainer = document.getElementById('answersContainer');
     const message = document.getElementById('message');
     const nextBtn = document.getElementById('nextBtn');
     const restartBtn = document.getElementById('restartBtn');
-    const playAgainBtn = document.getElementById('playAgainBtn');
-    const backToStartBtn = document.getElementById('backToStartBtn');
-    const scoreDisplay = document.getElementById('scoreDisplay');
-    const progressText = document.getElementById('progressText');
-    const roundMeta = document.getElementById('roundMeta');
-    const progressFill = document.getElementById('progressFill');
+
+    const resultMetaText = document.getElementById('resultMetaText');
     const finalScore = document.getElementById('finalScore');
     const finalText = document.getElementById('finalText');
+    const singleResultSummary = document.getElementById('singleResultSummary');
     const correctAnswersCount = document.getElementById('correctAnswersCount');
     const wrongAnswersCount = document.getElementById('wrongAnswersCount');
     const finalPercent = document.getElementById('finalPercent');
+    const winnerBanner = document.getElementById('winnerBanner');
+    const multiplayerResultSummary = document.getElementById('multiplayerResultSummary');
+    const resultPlayer1Name = document.getElementById('resultPlayer1Name');
+    const resultPlayer1Score = document.getElementById('resultPlayer1Score');
+    const resultPlayer1Meta = document.getElementById('resultPlayer1Meta');
+    const resultPlayer2Name = document.getElementById('resultPlayer2Name');
+    const resultPlayer2Score = document.getElementById('resultPlayer2Score');
+    const resultPlayer2Meta = document.getElementById('resultPlayer2Meta');
+    const playAgainBtn = document.getElementById('playAgainBtn');
+    const backToStartBtn = document.getElementById('backToStartBtn');
 
     function cloneQuestionSet(questionSet) {
       return {
@@ -800,6 +1211,18 @@
           answers: [...question.answers],
           correctIndex: question.correctIndex
         }))
+      };
+    }
+
+    function createDefaultMultiplayerState() {
+      return {
+        player1Name: PLAYER_DEFAULT_NAMES.player1,
+        player2Name: PLAYER_DEFAULT_NAMES.player2,
+        player1Score: 0,
+        player2Score: 0,
+        player1QuestionCount: 0,
+        player2QuestionCount: 0,
+        selectedPlayerKey: null
       };
     }
 
@@ -823,6 +1246,112 @@
 
     function normalizeCompareKey(value) {
       return normalizeText(value).toLocaleLowerCase('ro-RO');
+    }
+
+    function pluralize(count, singular, plural) {
+      return `${count} ${count === 1 ? singular : plural}`;
+    }
+
+    function formatAssignedQuestionText(count) {
+      return pluralize(count, '\u00EEntrebare atribuit\u0103', '\u00EEntreb\u0103ri atribuite');
+    }
+
+    function formatCorrectAnswerText(count) {
+      return pluralize(count, 'r\u0103spuns corect', 'r\u0103spunsuri corecte');
+    }
+
+    function resolveMultiplayerNames() {
+      return {
+        player1Name: normalizeText(player1Input.value) || normalizeText(multiplayerState.player1Name) || PLAYER_DEFAULT_NAMES.player1,
+        player2Name: normalizeText(player2Input.value) || normalizeText(multiplayerState.player2Name) || PLAYER_DEFAULT_NAMES.player2
+      };
+    }
+
+    function syncPlayerInputsFromState() {
+      player1Input.value = multiplayerState.player1Name === PLAYER_DEFAULT_NAMES.player1 ? '' : multiplayerState.player1Name;
+      player2Input.value = multiplayerState.player2Name === PLAYER_DEFAULT_NAMES.player2 ? '' : multiplayerState.player2Name;
+    }
+
+    function getPlayerName(playerKey) {
+      return playerKey === PLAYER_KEYS.PLAYER_1 ? multiplayerState.player1Name : multiplayerState.player2Name;
+    }
+
+    function incrementPlayerScore(playerKey) {
+      if (playerKey === PLAYER_KEYS.PLAYER_1) {
+        multiplayerState.player1Score++;
+      } else {
+        multiplayerState.player2Score++;
+      }
+    }
+
+    function incrementPlayerQuestionCount(playerKey) {
+      if (playerKey === PLAYER_KEYS.PLAYER_1) {
+        multiplayerState.player1QuestionCount++;
+      } else {
+        multiplayerState.player2QuestionCount++;
+      }
+    }
+
+    function setAnswerButtonsDisabled(disabled) {
+      Array.from(document.querySelectorAll('.answer-btn')).forEach(button => {
+        button.disabled = disabled;
+      });
+    }
+
+    function updateModeUI() {
+      const isSingleMode = gameMode === GAME_MODES.SINGLE;
+      const copy = MODE_COPY[gameMode];
+
+      singleModeBtn.classList.toggle('active', isSingleMode);
+      multiModeBtn.classList.toggle('active', !isSingleMode);
+      playerSetup.classList.toggle('is-hidden', isSingleMode);
+      startIntroText.textContent = copy.intro;
+      modeDescription.textContent = copy.description;
+      startHowItWorksText.textContent = copy.howItWorks;
+      startBtn.textContent = copy.startLabel;
+    }
+
+    function updateMultiplayerPanels() {
+      const isMultiMode = gameMode === GAME_MODES.MULTI;
+
+      multiplayerScoreStrip.classList.toggle('is-hidden', !isMultiMode);
+      multiplayerTurnPanel.classList.toggle('is-hidden', !isMultiMode);
+
+      if (!isMultiMode) {
+        return;
+      }
+
+      player1ScoreName.textContent = multiplayerState.player1Name;
+      player2ScoreName.textContent = multiplayerState.player2Name;
+      player1ScoreValue.textContent = multiplayerState.player1Score;
+      player2ScoreValue.textContent = multiplayerState.player2Score;
+      player1ScoreMeta.textContent = formatAssignedQuestionText(multiplayerState.player1QuestionCount);
+      player2ScoreMeta.textContent = formatAssignedQuestionText(multiplayerState.player2QuestionCount);
+      player1SelectBtn.textContent = multiplayerState.player1Name;
+      player2SelectBtn.textContent = multiplayerState.player2Name;
+
+      player1ScoreCard.classList.toggle('active', multiplayerState.selectedPlayerKey === PLAYER_KEYS.PLAYER_1);
+      player2ScoreCard.classList.toggle('active', multiplayerState.selectedPlayerKey === PLAYER_KEYS.PLAYER_2);
+      player1SelectBtn.classList.toggle('selected', multiplayerState.selectedPlayerKey === PLAYER_KEYS.PLAYER_1);
+      player2SelectBtn.classList.toggle('selected', multiplayerState.selectedPlayerKey === PLAYER_KEYS.PLAYER_2);
+      player1SelectBtn.disabled = answered;
+      player2SelectBtn.disabled = answered;
+
+      if (answered && multiplayerState.selectedPlayerKey) {
+        turnSelectionNote.textContent = `${getPlayerName(multiplayerState.selectedPlayerKey)} a primit aceast\u0103 \u00EEntrebare.`;
+      } else if (multiplayerState.selectedPlayerKey) {
+        turnSelectionNote.textContent = `${getPlayerName(multiplayerState.selectedPlayerKey)} r\u0103spunde la aceast\u0103 \u00EEntrebare.`;
+      } else {
+        turnSelectionNote.textContent = 'Selecteaz\u0103 juc\u0103torul \u00EEnainte s\u0103 alegi r\u0103spunsul.';
+      }
+
+      turnPanelTitle.textContent = 'Alege cine r\u0103spunde la \u00EEntrebarea curent\u0103.';
+    }
+
+    function setGameMode(mode) {
+      gameMode = mode;
+      updateModeUI();
+      updateMultiplayerPanels();
     }
 
     function setImportFeedback(text, type = '') {
@@ -1025,6 +1554,14 @@
       return mixedPool.slice(0, roundSize).map(prepareQuestion);
     }
 
+    function resetResultPanels() {
+      resultMetaText.textContent = 'Rund\u0103 finalizat\u0103';
+      singleResultSummary.classList.remove('is-hidden');
+      winnerBanner.classList.add('is-hidden');
+      winnerBanner.classList.remove('tie');
+      multiplayerResultSummary.classList.add('is-hidden');
+    }
+
     function startNewRound() {
       quizData = buildRoundQuestions();
 
@@ -1035,11 +1572,27 @@
       }
 
       currentQuestionIndex = 0;
-      score = 0;
       answered = false;
-      scoreDisplay.textContent = 'Scor: 0';
       message.textContent = '';
       message.className = 'message';
+      resetResultPanels();
+
+      if (gameMode === GAME_MODES.MULTI) {
+        const resolvedNames = resolveMultiplayerNames();
+        multiplayerState = {
+          player1Name: resolvedNames.player1Name,
+          player2Name: resolvedNames.player2Name,
+          player1Score: 0,
+          player2Score: 0,
+          player1QuestionCount: 0,
+          player2QuestionCount: 0,
+          selectedPlayerKey: null
+        };
+        syncPlayerInputsFromState();
+      } else {
+        score = 0;
+      }
+
       showScreen(quizView);
       renderQuestion();
     }
@@ -1052,21 +1605,37 @@
       message.className = 'message';
       answersContainer.innerHTML = '';
 
+      if (gameMode === GAME_MODES.MULTI) {
+        multiplayerState.selectedPlayerKey = null;
+      }
+
       questionNumber.textContent = `\u00CEntrebarea ${currentQuestionIndex + 1}`;
       questionText.textContent = item.question;
       progressText.textContent = `\u00CEntrebarea ${currentQuestionIndex + 1} din ${quizData.length}`;
       roundMeta.textContent = `Rund\u0103 de ${quizData.length} \u00EEntreb\u0103ri`;
       progressFill.style.width = `${(currentQuestionIndex / quizData.length) * 100}%`;
-      scoreDisplay.textContent = `Scor: ${score}`;
 
       item.answers.forEach((answer, index) => {
         const button = document.createElement('button');
         button.className = 'answer-btn';
         button.type = 'button';
         button.textContent = answer;
+        button.disabled = gameMode === GAME_MODES.MULTI;
         button.addEventListener('click', () => selectAnswer(index, button));
         answersContainer.appendChild(button);
       });
+
+      updateMultiplayerPanels();
+    }
+
+    function selectMultiplayerPlayer(playerKey) {
+      if (gameMode !== GAME_MODES.MULTI || answered) {
+        return;
+      }
+
+      multiplayerState.selectedPlayerKey = playerKey;
+      setAnswerButtonsDisabled(false);
+      updateMultiplayerPanels();
     }
 
     function selectAnswer(selectedIndex, selectedButton) {
@@ -1074,30 +1643,51 @@
         return;
       }
 
+      if (gameMode === GAME_MODES.MULTI && !multiplayerState.selectedPlayerKey) {
+        turnSelectionNote.textContent = 'Selecteaz\u0103 mai \u00EEnt\u00E2i juc\u0103torul care prime\u0219te aceast\u0103 \u00EEntrebare.';
+        return;
+      }
+
       answered = true;
 
       const item = quizData[currentQuestionIndex];
       const allButtons = Array.from(document.querySelectorAll('.answer-btn'));
+      const selectedPlayerKey = multiplayerState.selectedPlayerKey;
 
       allButtons.forEach(button => {
         button.disabled = true;
       });
 
+      if (gameMode === GAME_MODES.MULTI) {
+        incrementPlayerQuestionCount(selectedPlayerKey);
+      }
+
       if (selectedIndex === item.correctIndex) {
         selectedButton.classList.add('correct');
-        message.textContent = 'R\u0103spuns corect.';
-        message.classList.add('correct');
-        score++;
-        scoreDisplay.textContent = `Scor: ${score}`;
+        message.className = 'message correct';
+
+        if (gameMode === GAME_MODES.MULTI) {
+          incrementPlayerScore(selectedPlayerKey);
+          message.textContent = `R\u0103spuns corect pentru ${getPlayerName(selectedPlayerKey)}.`;
+        } else {
+          score++;
+          message.textContent = 'R\u0103spuns corect.';
+        }
       } else {
         selectedButton.classList.add('wrong');
         allButtons[item.correctIndex].classList.add('reveal-correct');
-        message.textContent = 'R\u0103spuns gre\u0219it.';
-        message.classList.add('wrong');
+        message.className = 'message wrong';
+
+        if (gameMode === GAME_MODES.MULTI) {
+          message.textContent = `R\u0103spuns gre\u0219it pentru ${getPlayerName(selectedPlayerKey)}.`;
+        } else {
+          message.textContent = 'R\u0103spuns gre\u0219it.';
+        }
       }
 
       nextBtn.disabled = false;
       progressFill.style.width = `${((currentQuestionIndex + 1) / quizData.length) * 100}%`;
+      updateMultiplayerPanels();
     }
 
     function nextQuestion() {
@@ -1111,21 +1701,58 @@
     }
 
     function showResults() {
-      const percent = Math.round((score / quizData.length) * 100);
-      const wrong = quizData.length - score;
-
       showScreen(resultView);
-      finalScore.textContent = `${score} / ${quizData.length}`;
-      correctAnswersCount.textContent = score;
-      wrongAnswersCount.textContent = wrong;
-      finalPercent.textContent = `${percent}%`;
 
-      if (percent === 100) {
-        finalText.textContent = 'Excelent. Ai r\u0103spuns corect la toate \u00EEntreb\u0103rile.';
-      } else if (percent >= 60) {
-        finalText.textContent = 'Foarte bine. Ai r\u0103spuns corect la majoritatea \u00EEntreb\u0103rilor.';
+      if (gameMode === GAME_MODES.MULTI) {
+        const player1ScoreTotal = multiplayerState.player1Score;
+        const player2ScoreTotal = multiplayerState.player2Score;
+        const player1QuestionTotal = multiplayerState.player1QuestionCount;
+        const player2QuestionTotal = multiplayerState.player2QuestionCount;
+
+        resultMetaText.textContent = 'Duel finalizat';
+        finalScore.textContent = `${player1ScoreTotal} - ${player2ScoreTotal}`;
+        singleResultSummary.classList.add('is-hidden');
+        multiplayerResultSummary.classList.remove('is-hidden');
+        winnerBanner.classList.remove('is-hidden');
+
+        resultPlayer1Name.textContent = multiplayerState.player1Name;
+        resultPlayer2Name.textContent = multiplayerState.player2Name;
+        resultPlayer1Score.textContent = player1ScoreTotal;
+        resultPlayer2Score.textContent = player2ScoreTotal;
+        resultPlayer1Meta.textContent = `${formatAssignedQuestionText(player1QuestionTotal)} \u2022 ${formatCorrectAnswerText(player1ScoreTotal)}`;
+        resultPlayer2Meta.textContent = `${formatAssignedQuestionText(player2QuestionTotal)} \u2022 ${formatCorrectAnswerText(player2ScoreTotal)}`;
+
+        if (player1ScoreTotal === player2ScoreTotal) {
+          winnerBanner.classList.add('tie');
+          winnerBanner.textContent = `Egalitate \u00EEntre ${multiplayerState.player1Name} \u0219i ${multiplayerState.player2Name}.`;
+          finalText.textContent = 'Niciun juc\u0103tor nu s-a desprins la scor. Po\u021Bi relua duelul pentru departajare.';
+        } else {
+          const winnerName = player1ScoreTotal > player2ScoreTotal ? multiplayerState.player1Name : multiplayerState.player2Name;
+          winnerBanner.classList.remove('tie');
+          winnerBanner.textContent = `${winnerName} este c\u00E2\u0219tig\u0103torul rundei.`;
+          finalText.textContent = `${winnerName} a acumulat cel mai mare scor \u00EEn aceast\u0103 rund\u0103.`;
+        }
       } else {
-        finalText.textContent = 'Runda s-a \u00EEncheiat. Mai \u00EEncearc\u0103 pentru un scor mai bun.';
+        const percent = Math.round((score / quizData.length) * 100);
+        const wrong = quizData.length - score;
+
+        resultMetaText.textContent = 'Rund\u0103 finalizat\u0103';
+        finalScore.textContent = `${score} / ${quizData.length}`;
+        correctAnswersCount.textContent = score;
+        wrongAnswersCount.textContent = wrong;
+        finalPercent.textContent = `${percent}%`;
+        singleResultSummary.classList.remove('is-hidden');
+        multiplayerResultSummary.classList.add('is-hidden');
+        winnerBanner.classList.add('is-hidden');
+        winnerBanner.classList.remove('tie');
+
+        if (percent === 100) {
+          finalText.textContent = 'Excelent. Ai r\u0103spuns corect la toate \u00EEntreb\u0103rile.';
+        } else if (percent >= 60) {
+          finalText.textContent = 'Foarte bine. Ai r\u0103spuns corect la majoritatea \u00EEntreb\u0103rilor.';
+        } else {
+          finalText.textContent = 'Runda s-a \u00EEncheiat. Mai \u00EEncearc\u0103 pentru un scor mai bun.';
+        }
       }
     }
 
@@ -1133,11 +1760,23 @@
       score = 0;
       currentQuestionIndex = 0;
       answered = false;
-      scoreDisplay.textContent = 'Scor: 0';
+      quizData = [];
       progressFill.style.width = '0%';
       message.textContent = '';
       message.className = 'message';
+      nextBtn.disabled = true;
+
+      multiplayerState.player1Score = 0;
+      multiplayerState.player2Score = 0;
+      multiplayerState.player1QuestionCount = 0;
+      multiplayerState.player2QuestionCount = 0;
+      multiplayerState.selectedPlayerKey = null;
+
+      syncPlayerInputsFromState();
+      updateModeUI();
       updateQuestionSourceUI();
+      updateMultiplayerPanels();
+      resetResultPanels();
       showScreen(startView);
     }
 
@@ -1231,16 +1870,22 @@
     }
 
     startBtn.addEventListener('click', startNewRound);
+    singleModeBtn.addEventListener('click', () => setGameMode(GAME_MODES.SINGLE));
+    multiModeBtn.addEventListener('click', () => setGameMode(GAME_MODES.MULTI));
     importBtn.addEventListener('click', () => importFileInput.click());
     downloadTemplateBtn.addEventListener('click', downloadTemplate);
     resetQuestionsBtn.addEventListener('click', resetToDefaultQuestions);
     importFileInput.addEventListener('change', handleImportSelection);
+    player1SelectBtn.addEventListener('click', () => selectMultiplayerPlayer(PLAYER_KEYS.PLAYER_1));
+    player2SelectBtn.addEventListener('click', () => selectMultiplayerPlayer(PLAYER_KEYS.PLAYER_2));
     nextBtn.addEventListener('click', nextQuestion);
     restartBtn.addEventListener('click', startNewRound);
     playAgainBtn.addEventListener('click', startNewRound);
     backToStartBtn.addEventListener('click', goToStart);
 
     initializeQuestionSource();
+    syncPlayerInputsFromState();
+    setGameMode(GAME_MODES.SINGLE);
     goToStart();
     setImportFeedback('');
   </script>
