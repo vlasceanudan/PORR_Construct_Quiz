@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz PORR Romania</title>
+  <style>
+    :root {
+      --porr-blue: #0f3e73;
+      --porr-yellow: #ffed00;
+      --porr-blue-deep: #071f3d;
+      --porr-blue-mid: #1d538d;
+      --porr-blue-light: #93bae5;
+      --porr-blue-soft: #5f92c8;
+      --bg: #05162e;
+      --card: #0c2d56;
+      --surface: rgba(255, 255, 255, 0.08);
+      --surface-strong: rgba(255, 255, 255, 0.12);
+      --text: #f5f9ff;
+      --text-strong: #ffffff;
+      --muted: #c5d7ee;
+      --border: rgba(173, 203, 238, 0.22);
+      --correct: #16a34a;
+      --correct-bg: #dcfce7;
+      --wrong: #dc2626;
+      --wrong-bg: #fee2e2;
+      --disabled: #6381a7;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(38, 106, 175, 0.35), transparent 34%),
+        radial-gradient(circle at top right, rgba(255, 237, 0, 0.12), transparent 28%),
+        linear-gradient(180deg, #07182f 0%, #0a2447 52%, #081a34 100%);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 860px;
+    }
+
+    .card {
+      background:
+        linear-gradient(180deg, rgba(19, 58, 105, 0.96) 0%, rgba(9, 36, 70, 0.98) 100%);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .top-bar {
+      height: 8px;
+      background: linear-gradient(90deg, var(--porr-blue) 0%, var(--porr-yellow) 100%);
+      border-radius: 999px;
+      margin-bottom: 22px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+      padding: 20px;
+      border-radius: 22px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(10, 43, 79, 0.18) 100%);
+      border: 1px solid var(--border);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .brand-left {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      min-width: 0;
+      flex-wrap: wrap;
+      flex: 1;
+    }
+
+    .brand-logos {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .brand-copy {
+      min-width: 0;
+    }
+
+    .logo-wrap {
+      width: 126px;
+      height: 88px;
+      background: linear-gradient(135deg, #0a2343 0%, #123a69 100%);
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 10px;
+      flex-shrink: 0;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    .logo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .festival-logo-wrap {
+      min-width: 210px;
+      height: 96px;
+      background: linear-gradient(135deg, #0b2343 0%, #15477d 100%);
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 18px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      flex-shrink: 0;
+    }
+
+    .festival-logo-wrap img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 30px;
+      color: var(--text-strong);
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .score-badge {
+      background: linear-gradient(180deg, #ffef47 0%, #ffe000 100%);
+      color: var(--porr-blue-deep);
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: bold;
+      min-width: 110px;
+      text-align: center;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+    }
+
+    .screen {
+      display: none;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    .start-box {
+      text-align: center;
+      padding: 20px 8px 8px;
+    }
+
+    .start-box h2 {
+      font-size: 34px;
+      color: var(--text-strong);
+      margin: 10px 0 12px;
+    }
+
+    .start-box p {
+      color: var(--muted);
+      font-size: 17px;
+      max-width: 680px;
+      margin: 0 auto 24px;
+      line-height: 1.6;
+    }
+
+    .start-info,
+    .authoring-panel {
+      max-width: 700px;
+      margin: 0 auto 24px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--surface);
+      text-align: left;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+
+    .start-info strong,
+    .authoring-header strong {
+      display: block;
+      color: var(--text-strong);
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+
+    .start-info span,
+    .authoring-header span,
+    .source-details {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .authoring-panel {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.06) 100%);
+    }
+
+    .authoring-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .authoring-copy {
+      max-width: 500px;
+    }
+
+    .source-pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.10);
+      color: var(--text-strong);
+      font-size: 13px;
+      font-weight: bold;
+      border: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    .source-pill.imported {
+      background: rgba(255, 237, 0, 0.18);
+      border-color: rgba(255, 237, 0, 0.35);
+      color: #fff5ae;
+    }
+
+    .authoring-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .source-details {
+      margin-bottom: 10px;
+    }
+
+    .import-feedback {
+      min-height: 24px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .import-feedback.success {
+      color: var(--correct);
+    }
+
+    .import-feedback.error {
+      color: var(--wrong);
+    }
+
+    .progress-wrap {
+      margin-bottom: 22px;
+    }
+
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .progress-bar {
+      height: 12px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--porr-blue) 0%, var(--porr-yellow) 100%);
+      transition: width 0.25s ease;
+    }
+
+    .question-number {
+      font-size: 14px;
+      color: var(--porr-blue-light);
+      margin-bottom: 10px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .question-text {
+      font-size: 26px;
+      line-height: 1.35;
+      margin-bottom: 22px;
+      font-weight: bold;
+      color: var(--text-strong);
+    }
+
+    .answers {
+      display: grid;
+      gap: 12px;
+    }
+
+    .answer-btn {
+      width: 100%;
+      text-align: left;
+      padding: 16px 18px;
+      border-radius: 14px;
+      border: 2px solid rgba(255, 255, 255, 0.10);
+      background: rgba(255, 255, 255, 0.96);
+      cursor: pointer;
+      font-size: 16px;
+      color: var(--porr-blue-deep);
+      transition: transform 0.08s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .answer-btn:hover:not(:disabled) {
+      transform: translateY(-1px);
+      border-color: var(--porr-blue-soft);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
+    }
+
+    .answer-btn.correct {
+      background: var(--correct-bg);
+      border-color: var(--correct);
+      color: #166534;
+      font-weight: bold;
+    }
+
+    .answer-btn.wrong {
+      background: var(--wrong-bg);
+      border-color: var(--wrong);
+      color: #991b1b;
+      font-weight: bold;
+    }
+
+    .answer-btn.reveal-correct {
+      background: #ecfdf5;
+      border-color: #22c55e;
+      color: #166534;
+      font-weight: bold;
+    }
+
+    .answer-btn:disabled {
+      cursor: not-allowed;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .message {
+      min-height: 24px;
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    .message.correct {
+      color: var(--correct);
+    }
+
+    .message.wrong {
+      color: var(--wrong);
+    }
+
+    .controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    button.control-btn {
+      border: 1px solid transparent;
+      border-radius: 12px;
+      padding: 12px 18px;
+      font-size: 15px;
+      cursor: pointer;
+      background: linear-gradient(180deg, #ffef47 0%, #ffe000 100%);
+      color: var(--porr-blue-deep);
+      font-weight: bold;
+      transition: opacity 0.2s ease, transform 0.08s ease, box-shadow 0.2s ease, background 0.2s ease;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
+    }
+
+    button.control-btn:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
+    }
+
+    button.control-btn.secondary {
+      background: rgba(255, 255, 255, 0.12);
+      color: var(--text-strong);
+      border-color: var(--border);
+      box-shadow: none;
+    }
+
+    button.control-btn.outline {
+      background: transparent;
+      color: var(--text-strong);
+      border: 2px solid rgba(255, 255, 255, 0.22);
+      box-shadow: none;
+    }
+
+    button.control-btn:disabled {
+      background: var(--disabled);
+      color: white;
+      cursor: not-allowed;
+      border-color: var(--disabled);
+    }
+
+    .result {
+      text-align: center;
+      padding: 28px 8px 8px;
+    }
+
+    .result-score {
+      font-size: 52px;
+      margin: 10px 0;
+      font-weight: bold;
+      color: var(--text-strong);
+    }
+
+    .result p {
+      color: var(--muted);
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .result-summary {
+      margin: 20px auto 24px;
+      max-width: 520px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .result-tile {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      background: var(--surface-strong);
+    }
+
+    .result-tile strong {
+      display: block;
+      font-size: 22px;
+      color: var(--text-strong);
+      margin-bottom: 4px;
+    }
+
+    .result-tile span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .small-note {
+      margin-top: 18px;
+      font-size: 13px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+      line-height: 1.6;
+    }
+
+    #importFileInput {
+      display: none;
+    }
+
+    @media (max-width: 640px) {
+      .card {
+        padding: 18px;
+      }
+
+      .logo-wrap {
+        width: 112px;
+        height: 78px;
+      }
+
+      .festival-logo-wrap {
+        min-width: 0;
+        width: 100%;
+        height: 82px;
+      }
+
+      .question-text {
+        font-size: 21px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      .start-box h2 {
+        font-size: 26px;
+      }
+
+      .result-score {
+        font-size: 40px;
+      }
+
+      .result-summary {
+        grid-template-columns: 1fr;
+      }
+
+      .authoring-header,
+      .footer,
+      .progress-top {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .source-pill {
+        width: fit-content;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="card">
+      <div class="top-bar"></div>
+
+      <div class="brand">
+        <div class="brand-left">
+          <div class="brand-logos">
+            <div class="logo-wrap">
+              <img src="Porr-Logo_v2.png" alt="PORR Logo">
+            </div>
+            <div class="festival-logo-wrap">
+              <img src="Logo-Construct-Fest-1-1.svg" alt="Construct Fest 2026 Logo">
+            </div>
+          </div>
+          <div class="brand-copy">
+            <h1>Quiz PORR Construct</h1>
+            <div class="meta">Edi&#539;ie Construct Fest 2026</div>
+          </div>
+        </div>
+        <div class="score-badge" id="scoreDisplay">Scor: 0</div>
+      </div>
+
+      <div id="startView" class="screen active">
+        <div class="start-box">
+          <h2>Bine ai venit</h2>
+          <p>
+            &#206;n aceast&#259; rund&#259; vei primi p&#226;n&#259; la 5 &#238;ntreb&#259;ri alese automat. R&#259;spunsurile sunt amestecate la fiecare &#238;ntrebare, iar feedback-ul apare imediat dup&#259; selec&#539;ie.
+          </p>
+
+          <div class="start-info">
+            <strong>Cum func&#539;ioneaz&#259;</strong>
+            <span>
+              Apas&#259; pe &bdquo;&#206;ncepe quiz-ul&rdquo;, r&#259;spunde la &#238;ntreb&#259;rile din rund&#259; &#537;i vezi scorul final la final.
+              Po&#539;i relua runda oric&#226;nd sau te po&#539;i &#238;ntoarce la ecranul de start.
+            </span>
+          </div>
+
+          <div class="authoring-panel">
+            <div class="authoring-header">
+              <div class="authoring-copy">
+                <strong>Administrare &#238;ntreb&#259;ri</strong>
+                <span>
+                  Quiz-ul porne&#537;te cu un set implicit, dar po&#539;i importa un fi&#537;ier JSON valid, po&#539;i reveni la setul implicit sau po&#539;i desc&#259;rca un &#537;ablon ca punct de plecare.
+                </span>
+              </div>
+              <div class="source-pill" id="questionSourceBadge">Set implicit</div>
+            </div>
+
+            <div class="authoring-actions">
+              <button class="control-btn outline" id="importBtn" type="button">Import&#259; JSON</button>
+              <button class="control-btn secondary" id="downloadTemplateBtn" type="button">Descarc&#259; &#537;ablonul</button>
+              <button class="control-btn outline" id="resetQuestionsBtn" type="button">Set implicit</button>
+              <input id="importFileInput" type="file" accept=".json,application/json" />
+            </div>
+
+            <div class="source-details" id="questionSourceDetails"></div>
+            <div class="import-feedback" id="importFeedback" role="status" aria-live="polite"></div>
+          </div>
+
+          <button class="control-btn" id="startBtn" type="button">&#206;ncepe quiz-ul</button>
+        </div>
+      </div>
+
+      <div id="quizView" class="screen">
+        <div class="progress-wrap">
+          <div class="progress-top">
+            <div class="meta" id="progressText">&#206;ntrebarea 1 din 5</div>
+            <div class="meta" id="roundMeta">Rund&#259; de 5 &#238;ntreb&#259;ri</div>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+        </div>
+
+        <div class="question-number" id="questionNumber"></div>
+        <div class="question-text" id="questionText"></div>
+        <div class="answers" id="answersContainer"></div>
+
+        <div class="footer">
+          <div class="message" id="message"></div>
+          <div class="controls">
+            <button class="control-btn secondary" id="restartBtn" type="button">Re&#238;ncepe</button>
+            <button class="control-btn" id="nextBtn" type="button" disabled>Urm&#259;toarea</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="resultView" class="screen">
+        <div class="result">
+          <div class="meta">Rund&#259; finalizat&#259;</div>
+          <div class="result-score" id="finalScore"></div>
+          <p id="finalText"></p>
+
+          <div class="result-summary">
+            <div class="result-tile">
+              <strong id="correctAnswersCount">0</strong>
+              <span>R&#259;spunsuri corecte</span>
+            </div>
+            <div class="result-tile">
+              <strong id="wrongAnswersCount">0</strong>
+              <span>R&#259;spunsuri gre&#537;ite</span>
+            </div>
+            <div class="result-tile">
+              <strong id="finalPercent">0%</strong>
+              <span>Scor final</span>
+            </div>
+          </div>
+
+          <div class="controls" style="justify-content:center;">
+            <button class="control-btn" id="playAgainBtn" type="button">Joac&#259; din nou</button>
+            <button class="control-btn outline" id="backToStartBtn" type="button">&#206;napoi la start</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'porr-quiz-question-set-v1';
+    const QUESTIONS_PER_ROUND = 5;
+    const TEMPLATE_FILE_NAME = 'porr-questions-template.json';
+
+    const DEFAULT_QUESTION_SET = {
+      version: 1,
+      questions: [
+        {
+          id: 'quiz-theme',
+          question: 'Ce companie este tema principal\u0103 a acestui quiz?',
+          answers: ['PORR Romania', 'Trimble', 'Autodesk', 'buildingSMART'],
+          correctIndex: 0
+        },
+        {
+          id: 'porr-romania-country',
+          question: '\u00CEn ce \u021Bar\u0103 activeaz\u0103 PORR Romania?',
+          answers: ['Ungaria', 'Rom\u00E2nia', 'Austria', 'Bulgaria'],
+          correctIndex: 1
+        },
+        {
+          id: 'porr-brand-yellow',
+          question: 'Ce culoare este asociat\u0103 \u00EEn mod clasic cu identitatea vizual\u0103 PORR?',
+          answers: ['Mov', 'Galben', 'Roz', 'Turcoaz'],
+          correctIndex: 1
+        },
+        {
+          id: 'porr-brand-blue',
+          question: 'Ce culoare este folosit\u0103 frecvent al\u0103turi de galben \u00EEn brandingul PORR?',
+          answers: ['Verde', 'Portocaliu', 'Albastru \u00EEnchis', 'Ro\u0219u'],
+          correctIndex: 2
+        },
+        {
+          id: 'construction-domain',
+          question: 'Ce tip de domeniu este asociat frecvent cu activitatea PORR Romania?',
+          answers: ['Construc\u021Bii', 'Gaming', 'Mod\u0103', 'Agricultur\u0103'],
+          correctIndex: 0
+        },
+        {
+          id: 'project-example',
+          question: 'Ce tip de proiect poate fi asociat cu o companie precum PORR Romania?',
+          answers: ['Autostr\u0103zi', 'Platforme de streaming', 'Festivaluri muzicale', 'Jocuri video'],
+          correctIndex: 0
+        },
+        {
+          id: 'construction-relevance',
+          question: 'Care dintre urm\u0103toarele este relevant \u00EEntr-un proiect de construc\u021Bii?',
+          answers: ['Planificare, execu\u021Bie \u0219i monitorizare', 'Doar post\u0103ri social media', 'Doar design de logo', 'Doar reclame video'],
+          correctIndex: 0
+        },
+        {
+          id: 'site-documentation',
+          question: 'Ce documentare este util\u0103 \u00EEntr-un proiect de \u0219antier?',
+          answers: ['Raport zilnic de \u0219antier', 'Playlist de birou', 'Meniu de restaurant', 'Review de filme'],
+          correctIndex: 0
+        },
+        {
+          id: 'hse-meaning',
+          question: 'Ce \u00EEnseamn\u0103 HSE \u00EEn context organiza\u021Bional?',
+          answers: ['Health, Safety and Environment', 'Heavy Structure Engineering', 'High Speed Execution', 'Human Support Equipment'],
+          correctIndex: 0
+        },
+        {
+          id: 'bim-meaning',
+          question: 'Ce \u00EEnseamn\u0103 BIM \u00EEn mod uzual?',
+          answers: ['Building Information Modeling', 'Basic Internal Method', 'Build It Manually', 'Business Improvement Matrix'],
+          correctIndex: 0
+        },
+        {
+          id: 'bim-benefit',
+          question: 'Ce avantaj ofer\u0103 BIM \u00EEntr-un proiect?',
+          answers: ['Colaborare \u0219i coordonare mai bun\u0103', 'Mai pu\u021Bin\u0103 informa\u021Bie', 'Mai mult haos', 'Eliminarea tuturor verific\u0103rilor'],
+          correctIndex: 0
+        },
+        {
+          id: 'site-safety',
+          question: 'Care este o practic\u0103 corect\u0103 pe \u0219antier?',
+          answers: ['Respectarea regulilor de siguran\u021B\u0103', 'Ignorarea echipamentului de protec\u021Bie', 'Acces \u00EEn zone nepermise', 'Lucru f\u0103r\u0103 instructaj'],
+          correctIndex: 0
+        }
+      ]
+    };
+
+    let activeQuestionSet = cloneQuestionSet(DEFAULT_QUESTION_SET);
+    let activeQuestionSource = {
+      type: 'default',
+      fileName: null,
+      persisted: false
+    };
+    let quizData = [];
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let answered = false;
+
+    const startView = document.getElementById('startView');
+    const quizView = document.getElementById('quizView');
+    const resultView = document.getElementById('resultView');
+
+    const startBtn = document.getElementById('startBtn');
+    const importBtn = document.getElementById('importBtn');
+    const downloadTemplateBtn = document.getElementById('downloadTemplateBtn');
+    const resetQuestionsBtn = document.getElementById('resetQuestionsBtn');
+    const importFileInput = document.getElementById('importFileInput');
+    const questionSourceBadge = document.getElementById('questionSourceBadge');
+    const questionSourceDetails = document.getElementById('questionSourceDetails');
+    const importFeedback = document.getElementById('importFeedback');
+    const questionNumber = document.getElementById('questionNumber');
+    const questionText = document.getElementById('questionText');
+    const answersContainer = document.getElementById('answersContainer');
+    const message = document.getElementById('message');
+    const nextBtn = document.getElementById('nextBtn');
+    const restartBtn = document.getElementById('restartBtn');
+    const playAgainBtn = document.getElementById('playAgainBtn');
+    const backToStartBtn = document.getElementById('backToStartBtn');
+    const scoreDisplay = document.getElementById('scoreDisplay');
+    const progressText = document.getElementById('progressText');
+    const roundMeta = document.getElementById('roundMeta');
+    const progressFill = document.getElementById('progressFill');
+    const finalScore = document.getElementById('finalScore');
+    const finalText = document.getElementById('finalText');
+    const correctAnswersCount = document.getElementById('correctAnswersCount');
+    const wrongAnswersCount = document.getElementById('wrongAnswersCount');
+    const finalPercent = document.getElementById('finalPercent');
+
+    function cloneQuestionSet(questionSet) {
+      return {
+        version: questionSet.version,
+        questions: questionSet.questions.map(question => ({
+          id: question.id,
+          question: question.question,
+          answers: [...question.answers],
+          correctIndex: question.correctIndex
+        }))
+      };
+    }
+
+    function showScreen(screen) {
+      [startView, quizView, resultView].forEach(view => view.classList.remove('active'));
+      screen.classList.add('active');
+    }
+
+    function shuffleArray(array) {
+      const copy = [...array];
+      for (let index = copy.length - 1; index > 0; index--) {
+        const randomIndex = Math.floor(Math.random() * (index + 1));
+        [copy[index], copy[randomIndex]] = [copy[randomIndex], copy[index]];
+      }
+      return copy;
+    }
+
+    function normalizeText(value) {
+      return typeof value === 'string' ? value.trim() : '';
+    }
+
+    function normalizeCompareKey(value) {
+      return normalizeText(value).toLocaleLowerCase('ro-RO');
+    }
+
+    function setImportFeedback(text, type = '') {
+      importFeedback.textContent = text;
+      importFeedback.className = 'import-feedback';
+      if (type) {
+        importFeedback.classList.add(type);
+      }
+    }
+
+    function validateQuestionSet(candidate) {
+      if (!candidate || typeof candidate !== 'object' || Array.isArray(candidate)) {
+        throw new Error('Fi\u0219ierul trebuie s\u0103 con\u021Bin\u0103 un obiect JSON.');
+      }
+
+      if (candidate.version !== 1) {
+        throw new Error('C\u00E2mpul "version" trebuie s\u0103 fie 1.');
+      }
+
+      if (!Array.isArray(candidate.questions)) {
+        throw new Error('C\u00E2mpul "questions" trebuie s\u0103 fie o list\u0103.');
+      }
+
+      if (candidate.questions.length === 0) {
+        throw new Error('Lista "questions" trebuie s\u0103 con\u021Bin\u0103 cel pu\u021Bin o \u00EEntrebare.');
+      }
+
+      const seenIds = new Set();
+
+      const normalizedQuestions = candidate.questions.map((entry, questionIndex) => {
+        const displayIndex = questionIndex + 1;
+
+        if (!entry || typeof entry !== 'object' || Array.isArray(entry)) {
+          throw new Error(`\u00CEntrebarea ${displayIndex} trebuie s\u0103 fie un obiect.`);
+        }
+
+        const id = normalizeText(entry.id);
+        if (!id) {
+          throw new Error(`\u00CEntrebarea ${displayIndex} are nevoie de un "id" nevid.`);
+        }
+
+        const idKey = normalizeCompareKey(id);
+        if (seenIds.has(idKey)) {
+          throw new Error(`ID-ul "${id}" este duplicat.`);
+        }
+        seenIds.add(idKey);
+
+        const question = normalizeText(entry.question);
+        if (!question) {
+          throw new Error(`\u00CEntrebarea ${displayIndex} are nevoie de text \u00EEn c\u00E2mpul "question".`);
+        }
+
+        if (!Array.isArray(entry.answers)) {
+          throw new Error(`\u00CEntrebarea ${displayIndex} trebuie s\u0103 aib\u0103 lista "answers".`);
+        }
+
+        if (entry.answers.length < 2 || entry.answers.length > 6) {
+          throw new Error(`\u00CEntrebarea ${displayIndex} trebuie s\u0103 aib\u0103 \u00EEntre 2 \u0219i 6 r\u0103spunsuri.`);
+        }
+
+        const seenAnswers = new Set();
+        const answers = entry.answers.map((answer, answerIndex) => {
+          const text = normalizeText(answer);
+
+          if (!text) {
+            throw new Error(`R\u0103spunsul ${answerIndex + 1} din \u00EEntrebarea ${displayIndex} este gol.`);
+          }
+
+          const answerKey = normalizeCompareKey(text);
+          if (seenAnswers.has(answerKey)) {
+            throw new Error(`\u00CEntrebarea ${displayIndex} con\u021Bine r\u0103spunsuri duplicate.`);
+          }
+          seenAnswers.add(answerKey);
+
+          return text;
+        });
+
+        if (!Number.isInteger(entry.correctIndex)) {
+          throw new Error(`\u00CEntrebarea ${displayIndex} trebuie s\u0103 aib\u0103 un "correctIndex" \u00EEntreg.`);
+        }
+
+        if (entry.correctIndex < 0 || entry.correctIndex >= answers.length) {
+          throw new Error(`"correctIndex" este \u00EEn afara listei de r\u0103spunsuri pentru \u00EEntrebarea ${displayIndex}.`);
+        }
+
+        return {
+          id,
+          question,
+          answers,
+          correctIndex: entry.correctIndex
+        };
+      });
+
+      return {
+        version: 1,
+        questions: normalizedQuestions
+      };
+    }
+
+    function parseImportedQuestionSet(rawContent) {
+      const sanitizedContent = typeof rawContent === 'string' ? rawContent.replace(/^\uFEFF/, '') : '';
+      let parsedContent;
+
+      try {
+        parsedContent = JSON.parse(sanitizedContent);
+      } catch (error) {
+        throw new Error('Fi\u0219ierul JSON nu poate fi citit. Verific\u0103 sintaxa \u0219i salveaz\u0103-l ca UTF-8.');
+      }
+
+      return validateQuestionSet(parsedContent);
+    }
+
+    function persistImportedQuestionSet(questionSet, fileName) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          fileName,
+          questionSet
+        }));
+        return true;
+      } catch (error) {
+        console.warn('Persistarea local\u0103 a setului de \u00EEntreb\u0103ri a e\u0219uat.', error);
+        return false;
+      }
+    }
+
+    function clearPersistedQuestionSet() {
+      try {
+        localStorage.removeItem(STORAGE_KEY);
+      } catch (error) {
+        console.warn('Cur\u0103\u021Barea setului de \u00EEntreb\u0103ri din storage a e\u0219uat.', error);
+      }
+    }
+
+    function loadPersistedQuestionSet() {
+      try {
+        const rawValue = localStorage.getItem(STORAGE_KEY);
+        if (!rawValue) {
+          return null;
+        }
+
+        const parsedValue = JSON.parse(rawValue);
+        const questionSet = validateQuestionSet(parsedValue.questionSet);
+        const fileName = normalizeText(parsedValue.fileName) || 'porr-questions-imported.json';
+
+        return { questionSet, fileName };
+      } catch (error) {
+        clearPersistedQuestionSet();
+        return null;
+      }
+    }
+
+    function updateQuestionSourceUI() {
+      const totalQuestions = activeQuestionSet.questions.length;
+      const roundSize = Math.min(QUESTIONS_PER_ROUND, totalQuestions);
+
+      questionSourceBadge.className = 'source-pill';
+
+      if (activeQuestionSource.type === 'imported') {
+        questionSourceBadge.classList.add('imported');
+        questionSourceBadge.textContent = 'Importat';
+        questionSourceDetails.textContent = `${activeQuestionSource.fileName} - ${totalQuestions} \u00EEntreb\u0103ri disponibile - rund\u0103 de ${roundSize}.`;
+      } else {
+        questionSourceBadge.textContent = 'Set implicit';
+        questionSourceDetails.textContent = `${totalQuestions} \u00EEntreb\u0103ri implicite disponibile - rund\u0103 de ${roundSize}.`;
+      }
+
+      startBtn.disabled = totalQuestions === 0;
+    }
+
+    function activateQuestionSet(questionSet, source) {
+      activeQuestionSet = cloneQuestionSet(questionSet);
+      activeQuestionSource = {
+        type: source.type,
+        fileName: source.fileName || null,
+        persisted: Boolean(source.persisted)
+      };
+      updateQuestionSourceUI();
+    }
+
+    function prepareQuestion(question) {
+      const shuffledAnswers = question.answers.map((answer, index) => ({
+        text: answer,
+        isCorrect: index === question.correctIndex
+      }));
+
+      const mixedAnswers = shuffleArray(shuffledAnswers);
+      const newCorrectIndex = mixedAnswers.findIndex(answer => answer.isCorrect);
+
+      return {
+        id: question.id,
+        question: question.question,
+        answers: mixedAnswers.map(answer => answer.text),
+        correctIndex: newCorrectIndex
+      };
+    }
+
+    function buildRoundQuestions() {
+      const mixedPool = shuffleArray(activeQuestionSet.questions);
+      const roundSize = Math.min(QUESTIONS_PER_ROUND, mixedPool.length);
+      return mixedPool.slice(0, roundSize).map(prepareQuestion);
+    }
+
+    function startNewRound() {
+      quizData = buildRoundQuestions();
+
+      if (quizData.length === 0) {
+        showScreen(startView);
+        setImportFeedback('Nu exist\u0103 \u00EEntreb\u0103ri valide pentru a porni quiz-ul.', 'error');
+        return;
+      }
+
+      currentQuestionIndex = 0;
+      score = 0;
+      answered = false;
+      scoreDisplay.textContent = 'Scor: 0';
+      message.textContent = '';
+      message.className = 'message';
+      showScreen(quizView);
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      const item = quizData[currentQuestionIndex];
+      answered = false;
+      nextBtn.disabled = true;
+      message.textContent = '';
+      message.className = 'message';
+      answersContainer.innerHTML = '';
+
+      questionNumber.textContent = `\u00CEntrebarea ${currentQuestionIndex + 1}`;
+      questionText.textContent = item.question;
+      progressText.textContent = `\u00CEntrebarea ${currentQuestionIndex + 1} din ${quizData.length}`;
+      roundMeta.textContent = `Rund\u0103 de ${quizData.length} \u00EEntreb\u0103ri`;
+      progressFill.style.width = `${(currentQuestionIndex / quizData.length) * 100}%`;
+      scoreDisplay.textContent = `Scor: ${score}`;
+
+      item.answers.forEach((answer, index) => {
+        const button = document.createElement('button');
+        button.className = 'answer-btn';
+        button.type = 'button';
+        button.textContent = answer;
+        button.addEventListener('click', () => selectAnswer(index, button));
+        answersContainer.appendChild(button);
+      });
+    }
+
+    function selectAnswer(selectedIndex, selectedButton) {
+      if (answered) {
+        return;
+      }
+
+      answered = true;
+
+      const item = quizData[currentQuestionIndex];
+      const allButtons = Array.from(document.querySelectorAll('.answer-btn'));
+
+      allButtons.forEach(button => {
+        button.disabled = true;
+      });
+
+      if (selectedIndex === item.correctIndex) {
+        selectedButton.classList.add('correct');
+        message.textContent = 'R\u0103spuns corect.';
+        message.classList.add('correct');
+        score++;
+        scoreDisplay.textContent = `Scor: ${score}`;
+      } else {
+        selectedButton.classList.add('wrong');
+        allButtons[item.correctIndex].classList.add('reveal-correct');
+        message.textContent = 'R\u0103spuns gre\u0219it.';
+        message.classList.add('wrong');
+      }
+
+      nextBtn.disabled = false;
+      progressFill.style.width = `${((currentQuestionIndex + 1) / quizData.length) * 100}%`;
+    }
+
+    function nextQuestion() {
+      currentQuestionIndex++;
+
+      if (currentQuestionIndex >= quizData.length) {
+        showResults();
+      } else {
+        renderQuestion();
+      }
+    }
+
+    function showResults() {
+      const percent = Math.round((score / quizData.length) * 100);
+      const wrong = quizData.length - score;
+
+      showScreen(resultView);
+      finalScore.textContent = `${score} / ${quizData.length}`;
+      correctAnswersCount.textContent = score;
+      wrongAnswersCount.textContent = wrong;
+      finalPercent.textContent = `${percent}%`;
+
+      if (percent === 100) {
+        finalText.textContent = 'Excelent. Ai r\u0103spuns corect la toate \u00EEntreb\u0103rile.';
+      } else if (percent >= 60) {
+        finalText.textContent = 'Foarte bine. Ai r\u0103spuns corect la majoritatea \u00EEntreb\u0103rilor.';
+      } else {
+        finalText.textContent = 'Runda s-a \u00EEncheiat. Mai \u00EEncearc\u0103 pentru un scor mai bun.';
+      }
+    }
+
+    function goToStart() {
+      score = 0;
+      currentQuestionIndex = 0;
+      answered = false;
+      scoreDisplay.textContent = 'Scor: 0';
+      progressFill.style.width = '0%';
+      message.textContent = '';
+      message.className = 'message';
+      updateQuestionSourceUI();
+      showScreen(startView);
+    }
+
+    function handleImportSelection(event) {
+      const [selectedFile] = event.target.files || [];
+
+      if (!selectedFile) {
+        return;
+      }
+
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        try {
+          const importedQuestionSet = parseImportedQuestionSet(reader.result);
+          const persisted = persistImportedQuestionSet(importedQuestionSet, selectedFile.name);
+          activateQuestionSet(importedQuestionSet, {
+            type: 'imported',
+            fileName: selectedFile.name,
+            persisted
+          });
+          goToStart();
+
+          if (persisted) {
+            setImportFeedback(`Fi\u0219ierul "${selectedFile.name}" a fost importat \u0219i salvat local.`, 'success');
+          } else {
+            setImportFeedback(`Fi\u0219ierul "${selectedFile.name}" a fost importat, dar browserul nu l-a putut salva local.`, 'success');
+          }
+        } catch (error) {
+          setImportFeedback(error.message || 'Importul a e\u0219uat.', 'error');
+          showScreen(startView);
+        } finally {
+          event.target.value = '';
+        }
+      };
+
+      reader.onerror = () => {
+        setImportFeedback('Fi\u0219ierul selectat nu a putut fi citit.', 'error');
+        event.target.value = '';
+      };
+
+      reader.readAsText(selectedFile, 'UTF-8');
+    }
+
+    function resetToDefaultQuestions() {
+      clearPersistedQuestionSet();
+      activateQuestionSet(DEFAULT_QUESTION_SET, {
+        type: 'default',
+        fileName: null,
+        persisted: false
+      });
+      goToStart();
+      setImportFeedback('Se folose\u0219te din nou setul implicit de \u00EEntreb\u0103ri.', 'success');
+    }
+
+    function downloadTemplate() {
+      const fileContent = JSON.stringify(cloneQuestionSet(DEFAULT_QUESTION_SET), null, 2);
+      const blob = new Blob([fileContent], { type: 'application/json;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const downloadLink = document.createElement('a');
+
+      downloadLink.href = url;
+      downloadLink.download = TEMPLATE_FILE_NAME;
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+
+      setTimeout(() => {
+        URL.revokeObjectURL(url);
+        document.body.removeChild(downloadLink);
+      }, 0);
+
+      setImportFeedback('\u0218ablonul JSON a fost desc\u0103rcat.', 'success');
+    }
+
+    function initializeQuestionSource() {
+      const storedQuestionSet = loadPersistedQuestionSet();
+
+      if (storedQuestionSet) {
+        activateQuestionSet(storedQuestionSet.questionSet, {
+          type: 'imported',
+          fileName: storedQuestionSet.fileName,
+          persisted: true
+        });
+      } else {
+        activateQuestionSet(DEFAULT_QUESTION_SET, {
+          type: 'default',
+          fileName: null,
+          persisted: false
+        });
+      }
+    }
+
+    startBtn.addEventListener('click', startNewRound);
+    importBtn.addEventListener('click', () => importFileInput.click());
+    downloadTemplateBtn.addEventListener('click', downloadTemplate);
+    resetQuestionsBtn.addEventListener('click', resetToDefaultQuestions);
+    importFileInput.addEventListener('change', handleImportSelection);
+    nextBtn.addEventListener('click', nextQuestion);
+    restartBtn.addEventListener('click', startNewRound);
+    playAgainBtn.addEventListener('click', startNewRound);
+    backToStartBtn.addEventListener('click', goToStart);
+
+    initializeQuestionSource();
+    goToStart();
+    setImportFeedback('');
+  </script>
+</body>
+</html>
