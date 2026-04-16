@@ -1,0 +1,44 @@
+.btn {
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-size: 15px;
+  cursor: pointer;
+  background: linear-gradient(180deg, #ffef47 0%, #ffe000 100%);
+  color: var(--porr-blue-deep);
+  font-weight: 800;
+  transition: opacity 0.2s ease, transform 0.08s ease, box-shadow 0.2s ease, background 0.2s ease;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
+}
+
+.btn:focus-visible {
+  outline: 3px solid rgba(255, 237, 0, 0.42);
+  outline-offset: 3px;
+}
+
+.secondary {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text-strong);
+  border-color: var(--border);
+  box-shadow: none;
+}
+
+.outline {
+  background: transparent;
+  color: var(--text-strong);
+  border: 2px solid rgba(255, 255, 255, 0.22);
+  box-shadow: none;
+}
+
+.btn:disabled {
+  background: var(--disabled);
+  color: white;
+  cursor: not-allowed;
+  border-color: var(--disabled);
+  box-shadow: none;
+}

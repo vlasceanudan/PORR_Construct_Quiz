@@ -1,0 +1,148 @@
+.app {
+  width: 100%;
+  max-width: 880px;
+}
+
+.card {
+  background: linear-gradient(180deg, rgba(19, 58, 105, 0.96) 0%, rgba(9, 36, 70, 0.98) 100%);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+  overflow: hidden;
+  position: relative;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  inset: auto -10% -120px 40%;
+  height: 240px;
+  background: radial-gradient(circle, rgba(255, 237, 0, 0.1), transparent 65%);
+  pointer-events: none;
+}
+
+.start {
+  background: linear-gradient(180deg, rgba(16, 55, 99, 0.96) 0%, rgba(7, 32, 64, 0.99) 100%);
+}
+
+.quiz {
+  background: linear-gradient(180deg, rgba(18, 60, 110, 0.97) 0%, rgba(8, 31, 66, 1) 100%);
+}
+
+.result {
+  background: linear-gradient(180deg, rgba(14, 54, 97, 0.96) 0%, rgba(8, 42, 74, 0.99) 100%);
+}
+
+.topBar {
+  height: 8px;
+  background: linear-gradient(90deg, var(--porr-blue) 0%, var(--porr-yellow) 100%);
+  border-radius: 999px;
+  margin-bottom: 22px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+  padding: 20px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(10, 43, 79, 0.18) 100%);
+  border: 1px solid var(--border);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  position: relative;
+  z-index: 1;
+}
+
+.brandLeft {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  min-width: 0;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.brandLogos {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.brandCopy {
+  min-width: 0;
+}
+
+.screenBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff7bf;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.brandCopy h1 {
+  margin: 0;
+  font-size: 32px;
+  color: var(--text-strong);
+}
+
+.brandMeta {
+  color: var(--text-strong);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.brandMetaHighlight {
+  color: rgb(132, 196, 65);
+}
+
+.logoWrap {
+  width: 425px;
+  height: 88px;
+  background: linear-gradient(135deg, #0a2343 0%, #123a69 100%);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 10px;
+  flex-shrink: 0;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.logoWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+@media (max-width: 640px) {
+  .card {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .logoWrap {
+    width: 100%;
+    height: 78px;
+  }
+
+  .brandCopy h1 {
+    font-size: 24px;
+  }
+}

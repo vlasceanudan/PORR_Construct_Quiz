@@ -1,0 +1,80 @@
+:root {
+  color-scheme: dark;
+  --porr-blue: #0f3e73;
+  --porr-yellow: #ffed00;
+  --porr-blue-deep: #071f3d;
+  --porr-blue-light: #93bae5;
+  --porr-blue-soft: #5f92c8;
+  --surface: rgba(255, 255, 255, 0.08);
+  --surface-strong: rgba(255, 255, 255, 0.12);
+  --text: #f5f9ff;
+  --text-strong: #ffffff;
+  --muted: #c5d7ee;
+  --border: rgba(173, 203, 238, 0.22);
+  --correct: #16a34a;
+  --correct-bg: #dcfce7;
+  --wrong: #dc2626;
+  --wrong-bg: #fee2e2;
+  --disabled: #6381a7;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--text);
+  font-family: Bahnschrift, "Trebuchet MS", "Segoe UI Variable Text", sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(38, 106, 175, 0.35), transparent 34%),
+    radial-gradient(circle at top right, rgba(255, 237, 0, 0.12), transparent 28%),
+    linear-gradient(180deg, #07182f 0%, #0a2447 52%, #081a34 100%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.04), transparent 30%),
+    radial-gradient(circle at 20% 20%, rgba(255, 237, 0, 0.06), transparent 20%);
+  opacity: 0.9;
+}
+
+#root {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+  position: relative;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+img {
+  max-width: 100%;
+}
+
+:focus-visible {
+  outline: 3px solid rgba(255, 237, 0, 0.36);
+  outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+  #root {
+    padding: 14px;
+  }
+}

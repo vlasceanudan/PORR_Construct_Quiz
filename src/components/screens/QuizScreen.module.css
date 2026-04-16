@@ -1,0 +1,191 @@
+.questionStage {
+  margin-bottom: 20px;
+}
+
+.questionNumber {
+  font-size: 14px;
+  color: var(--porr-blue-light);
+  margin-bottom: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.questionText {
+  font-size: 31px;
+  line-height: 1.32;
+  margin-bottom: 6px;
+  font-weight: 800;
+  color: var(--text-strong);
+}
+
+.multiplayerStrip {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.turnPanel {
+  margin-bottom: 20px;
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.06) 100%);
+  text-align: left;
+}
+
+.awaitingSelection {
+  border-color: rgba(255, 237, 0, 0.38);
+  box-shadow: 0 0 0 1px rgba(255, 237, 0, 0.12);
+}
+
+.lockedSelection {
+  border-color: rgba(95, 146, 200, 0.32);
+}
+
+.meta {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.turnPanel strong {
+  display: block;
+  margin-top: 6px;
+  color: var(--text-strong);
+  font-size: 19px;
+}
+
+.turnButtons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.playerSelectBtn {
+  flex: 1 1 220px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-strong);
+  padding: 14px 16px;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.08s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.playerSelectBtn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.14);
+}
+
+.playerSelectBtn:focus-visible {
+  outline: 3px solid rgba(255, 237, 0, 0.42);
+  outline-offset: 3px;
+}
+
+.selected {
+  background: linear-gradient(180deg, #ffef47 0%, #ffe000 100%);
+  color: var(--porr-blue-deep);
+  border-color: rgba(255, 237, 0, 0.42);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
+}
+
+.playerSelectBtn:disabled {
+  cursor: not-allowed;
+  opacity: 0.72;
+}
+
+.turnNote {
+  min-height: 20px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.warningNote {
+  color: #fff0a0;
+  font-weight: 700;
+}
+
+.answers {
+  display: grid;
+  gap: 14px;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+.message {
+  min-height: 24px;
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.correct {
+  color: var(--correct);
+}
+
+.wrong {
+  color: var(--wrong);
+}
+
+.controls {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.nextReady {
+  box-shadow: 0 16px 34px rgba(255, 224, 0, 0.24);
+}
+
+.emptyState {
+  text-align: center;
+  padding: 28px 8px 8px;
+}
+
+.emptyState h2 {
+  font-size: 32px;
+  color: var(--text-strong);
+  margin: 10px 0 12px;
+}
+
+.emptyState p {
+  color: var(--muted);
+  font-size: 17px;
+  max-width: 620px;
+  margin: 0 auto 24px;
+  line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .questionText {
+    font-size: 24px;
+  }
+
+  .multiplayerStrip {
+    grid-template-columns: 1fr;
+  }
+
+  .turnButtons {
+    flex-direction: column;
+  }
+
+  .controls {
+    width: 100%;
+  }
+
+  .controls > * {
+    flex: 1 1 100%;
+  }
+}
